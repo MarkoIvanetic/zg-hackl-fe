@@ -1,22 +1,36 @@
 import apiClient from "@/lib/apiClient";
 import { Event } from "@/types";
-import { useQuery, UseQueryResult } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
+import { useDebounce } from "@uidotdev/usehooks";
 
-const fetchEvents = async (search: string = ""): Promise<Event[]> => {
-  const response = await apiClient.get("/events", {
-    params: { search },
+type FetchEventsParams = {
+  [key: string]: string | undefined;
+};
+
+const fetchEvents = async (
+  params: FetchEventsParams = {}
+): Promise<Event[]> => {
+  const filteredParams: Record<string, string> = {};
+
+  Object.entries(params).forEach(([key, value]) => {
+    if (value && value.trim() !== "") {
+      filteredParams[key] = value;
+    }
   });
 
-  console.log("response:", response);
+  const response = await apiClient.get("/events", {
+    params: filteredParams,
+  });
+
   return response.data;
 };
 
-export const useEvents = (search: string = "") => {
+export const useEvents = (search: string) => {
   return useQuery({
-    queryKey: ["events", search], // Include search in query key
-    queryFn: () => fetchEvents(search), // Pass search to fetch function
-    staleTime: 5 * 60 * 1000, // Data considered fresh for 5 minutes
-    retry: 1, // Retry failed queries once
-    refetchOnWindowFocus: true, // Refetch when the window regains focus
+    queryKey: ["events", search],
+    queryFn: () => fetchEvents({ search }),
+    staleTime: 5 * 60 * 1000,
+    retry: 1,
+    refetchOnWindowFocus: true,
   });
 };
