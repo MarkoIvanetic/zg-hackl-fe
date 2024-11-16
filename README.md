@@ -1,5 +1,7 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/b33b8608-fcfb-472e-aa68-280372509a7e/deploy-status)](https://app.netlify.com/sites/zg-hackl/deploys)
+
 ## Getting Started
 
 Get your stuff installed:
