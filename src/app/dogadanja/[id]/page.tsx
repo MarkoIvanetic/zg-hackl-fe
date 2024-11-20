@@ -1,28 +1,23 @@
 import { notFound } from "next/navigation";
-import { Event } from "@/types"; // Your Event type
-import apiClient from "@/lib/apiClient"; // Axios instance
-
-interface EventDetailsPageProps {
-  params: { id: string };
-}
+import { Event } from "@/types";
+import apiClient from "@/lib/apiClient";
 
 async function fetchEventDetails(id: string): Promise<Event | null> {
   try {
     const response = await apiClient.get(`/events/${id}`);
     return response.data;
   } catch (error) {
-    console.log('error:', error);
-    return null; // Return null if the event is not found
+    console.error("Error fetching event details:", error);
+    return null;
   }
 }
 
-export default async function EventDetailsPage({
-  params,
-}: EventDetailsPageProps) {
+// @ts-expect-error no sufficient type definitions for params
+export default async function EventDetailsPage({ params }) {
   const event = await fetchEventDetails(params.id);
 
   if (!event) {
-    notFound(); // Shows a 404 page if the event is not found
+    notFound();
   }
 
   return (

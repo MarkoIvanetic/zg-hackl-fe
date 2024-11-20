@@ -3,10 +3,11 @@
 import EventList from "@/components/features/EventList";
 import { AppSidebar } from "@/components/features/sidebar/AppSidebar";
 import { SidebarTrigger } from "@/components/ui/sidebar";
+import { Suspense } from "react";
 
 export default function DogadanjaPage() {
   return (
-    <>
+    <Suspense>
       <AppSidebar />
       <main className="w-full">
         <div className="container mx-auto p-6">
@@ -17,6 +18,6 @@ export default function DogadanjaPage() {
           <EventList />
         </div>
       </main>
-    </>
+    </Suspense>
   );
 }
