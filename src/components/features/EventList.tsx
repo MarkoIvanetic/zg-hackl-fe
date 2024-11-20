@@ -2,18 +2,51 @@
 
 import { DebouncedInput } from "@/components/features/DebouncedInput";
 import { EventCard, EventCardSkeleton } from "@/components/features/EventCard";
+import { Pagination } from "@/components/features/Pagination";
 import RefreshButton from "@/components/features/RefreshButton";
-import { useEvents } from "@/hooks/useEvents";
+
+import { FetchEventsParams, useEvents } from "@/hooks/useEvents";
 import useQueryParams from "@/hooks/useQueryParams";
 
 export default function EventList() {
   const { query, change } = useQueryParams();
-  const search = query.search || "";
 
-  const { data, isFetching, error, isError, refetch } = useEvents(search);
+  const {
+    search = "",
+    event_type = "",
+    min_price = "",
+    max_price = "",
+    kid_friendly = "",
+    order_by = "start_datetime",
+    order_direction = "asc",
+    page = "1",
+    from = "",
+    to = "",
+    per_page = "10",
+  } = query as FetchEventsParams;
+
+  const { data, isFetching, error, isError, refetch } = useEvents({
+    search,
+    event_type,
+    min_price,
+    max_price,
+    kid_friendly,
+    order_by,
+    order_direction,
+    page,
+    from,
+    to,
+    per_page,
+  });
 
   const handleSearchChange = (value: string) => {
-    change({ search: value });
+    change({ search: value, page: null }); // Reset to first page on search change
+  };
+
+  const handlePageChange = (newPage: number) => {
+    const newValue = newPage === 1 ? null : String(newPage);
+
+    change({ page: newValue });
   };
 
   return (
@@ -29,14 +62,27 @@ export default function EventList() {
         <RefreshButton onClick={refetch} />
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 py-6">
         {isError && <p>Error loading events: {error.message}</p>}
+
         {isFetching && !isError
-          ? Array.from({ length: 6 }).map((_, index) => (
+          ? Array.from({ length: 12 }).map((_, index) => (
               <EventCardSkeleton key={index} />
             ))
-          : data?.map((event) => <EventCard key={event.id} event={event} />)}
+          : data?.records.map((event) => (
+              <EventCard key={event.id} event={event} />
+            ))}
       </div>
+      {/* @ts-ignore gone rogue  */}
+      {data?.total_pages > 1 && !isFetching && !isError && (
+        <div className="flex w-full justify-end">
+          <Pagination
+            totalPages={data?.total_pages || 1}
+            currentPage={Number(page)}
+            onPageChange={handlePageChange}
+          />
+        </div>
+      )}
     </div>
   );
 }

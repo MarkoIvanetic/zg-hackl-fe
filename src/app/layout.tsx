@@ -1,8 +1,9 @@
-import { Layout } from "@/components/features/Layout";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 
+import { AppProviders } from "@/components/features/AppProviders";
 import "./globals.css";
+import Link from "next/link";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -30,7 +31,30 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Layout>{children}</Layout>
+        <nav className="bg-sky-800 text-white">
+          <div className="container mx-auto flex items-center justify-between p-4">
+            <h1 className="text-lg font-bold w-1/2">My App</h1>
+            <ul className="flex space-x-8">
+              <li>
+                <Link
+                  href="/"
+                  className="text-gray-300 hover:text-white transition"
+                >
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/dogadanja"
+                  className="text-gray-300 hover:text-white transition"
+                >
+                  Događanja
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </nav>
+        <AppProviders>{children}</AppProviders>
       </body>
     </html>
   );
