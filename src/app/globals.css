@@ -8,6 +8,7 @@ body {
 
 @layer base {
   :root {
+    --navbar-height: 60px;
     --radius: 0.5rem;
     --sidebar-background: #fafafa;
     --sidebar-foreground: #383838;

@@ -4,6 +4,7 @@ import localFont from "next/font/local";
 import { AppProviders } from "@/components/features/AppProviders";
 import "./globals.css";
 import Link from "next/link";
+import { EventPreviewSheet } from "@/components/features/EventPreviewSheet";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -33,14 +34,14 @@ export default function RootLayout({
       >
         <nav className="bg-sky-800 text-white">
           <div className="container mx-auto flex items-center justify-between p-4">
-            <h1 className="text-lg font-bold w-1/2">My App</h1>
+            <h1 className="text-lg font-bold w-1/2">Zagreb događanja</h1>
             <ul className="flex space-x-8">
               <li>
                 <Link
                   href="/"
                   className="text-gray-300 hover:text-white transition"
                 >
-                  Home
+                  Naslovnica
                 </Link>
               </li>
               <li>
@@ -54,7 +55,10 @@ export default function RootLayout({
             </ul>
           </div>
         </nav>
-        <AppProviders>{children}</AppProviders>
+        <AppProviders>
+          <EventPreviewSheet />
+          {children}
+        </AppProviders>
       </body>
     </html>
   );

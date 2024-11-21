@@ -19,9 +19,11 @@ export const CategorySelector = ({ className, ...props }: React.HTMLProps<HTMLDi
 
   return (
     <div className={className} {...props}>
-      <label className="text-sm font-medium leading-none mb-2 block">Kategorija</label>
+        <label className="text-md font-semibold leading-none mb-4 block">
+        Kategorija:
+      </label>
       <Select value={query.event_type || ""} onValueChange={handleCategoryChange}>
-        <SelectTrigger className="w-full">
+        <SelectTrigger className="w-full bg-white">
           <SelectValue placeholder="Odaberi kategoriju" />
         </SelectTrigger>
         <SelectContent>

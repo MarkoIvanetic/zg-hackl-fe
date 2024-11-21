@@ -8,6 +8,13 @@ import RefreshButton from "@/components/features/RefreshButton";
 import { FetchEventsParams, useEvents } from "@/hooks/useEvents";
 import useQueryParams from "@/hooks/useQueryParams";
 
+const NoEventsMessage = () => (
+  <div className="text-left text-gray-500">
+    <p className="text-xl font-semibold">Nema događanja</p>
+    <p>Molimo promijenite pretragu ili filtre.</p>
+  </div>
+);
+
 export default function EventList() {
   const { query, change } = useQueryParams();
 
@@ -55,7 +62,7 @@ export default function EventList() {
         <DebouncedInput
           value={search}
           onChange={handleSearchChange}
-          placeholder="Search events..."
+          placeholder="Pretraži događanja..."
           debounceTime={300}
           className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
@@ -69,11 +76,15 @@ export default function EventList() {
           ? Array.from({ length: 12 }).map((_, index) => (
               <EventCardSkeleton key={index} />
             ))
-          : data?.records.map((event) => (
-              <EventCard key={event.id} event={event} />
-            ))}
+          : data?.records.length === 0 && <NoEventsMessage />}
+
+        {!isFetching &&
+          !isError &&
+          data?.records.map((event) => (
+            <EventCard key={event.id} event={event} />
+          ))}
       </div>
-      {/* @ts-ignore gone rogue  */}
+      {/* @ts-expect-error total_pages definetelly defined  */}
       {data?.total_pages > 1 && !isFetching && !isError && (
         <div className="flex w-full justify-end">
           <Pagination

@@ -2,6 +2,7 @@ import apiClient from "@/lib/apiClient";
 import { Event } from "@/types";
 import { useQuery, QueryFunctionContext } from "@tanstack/react-query";
 import { useDebounce } from "@uidotdev/usehooks";
+import { endOfDay, format, startOfDay } from "date-fns";
 
 export type FetchEventsParams = {
   search?: string;
@@ -31,8 +32,6 @@ const fetchEvents = async (
 ): Promise<PaginatedEventsResponse> => {
   const filteredParams: Record<string, string> = {};
 
-  console.log("params:", params);
-
   // Filter out undefined or empty parameters
   Object.entries(params).forEach(([key, value]) => {
     if (value && value.trim() !== "") {
@@ -40,15 +39,25 @@ const fetchEvents = async (
     }
   });
 
+  if (params.to) {
+    const toDate = new Date(params.to);
+    filteredParams.to = format(endOfDay(toDate), "yyyy-MM-dd'T'HH:mm:ss");
+  }
+
+  if (params.from) {
+    const fromDate = new Date(params.from);
+    filteredParams.from = format(startOfDay(fromDate), "yyyy-MM-dd'T'HH:mm:ss");
+  }
+
   const response = await apiClient.get("/events", {
     params: filteredParams,
   });
 
-  return response.data; // Assuming API returns a paginated response
+  return response.data;
 };
 
 export const useEvents = (params: FetchEventsParams) => {
-  const debouncedParams = useDebounce(params, 300); // Debounce for search input
+  const debouncedParams = useDebounce(params, 100); // Debounce for search input
 
   return useQuery<PaginatedEventsResponse, Error>({
     queryKey: ["events", debouncedParams],

@@ -12,7 +12,7 @@ export default function DogadanjaPage() {
       <main className="w-full">
         <div className="container mx-auto p-6">
           <div className="flex gap-x-2">
-            <SidebarTrigger />
+            <SidebarTrigger/>
             <h1 className="text-2xl font-bold mb-4">Događanja</h1>
           </div>
           <EventList />

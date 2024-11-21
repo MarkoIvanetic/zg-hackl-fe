@@ -5,6 +5,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { FC } from "react";
 
+import { Eye } from "lucide-react";
+
+import { Button } from "@/components/ui/button";
+import { useEventPreview } from "@/context/EventPreviewContext";
+
 interface CardProps {
   event: Event;
 }
@@ -12,6 +17,8 @@ interface CardProps {
 export const EventCard: FC<CardProps> = ({ event }) => {
   const startDate = new Date(event.start_datetime).toLocaleString();
   const endDate = new Date(event.end_datetime).toLocaleString();
+
+  const { openSheet } = useEventPreview();
 
   return (
     <div className="rounded-lg shadow-md bg-white border hover:shadow-lg transition-shadow duration-200">
@@ -23,7 +30,7 @@ export const EventCard: FC<CardProps> = ({ event }) => {
             className="w-full h-full object-cover"
           />
         ) : (
-          <span className="text-gray-500">No Image Available</span>
+          <span className="text-gray-500">Nema slike</span>
         )}
       </div>
 
@@ -34,6 +41,7 @@ export const EventCard: FC<CardProps> = ({ event }) => {
         >
           {event.name}
         </Link>
+
         <p className="text-sm text-gray-500">{event.event_type}</p>
         <p className="text-sm text-gray-500">Location: {event.location}</p>
         <p className="text-sm text-gray-500">
@@ -43,6 +51,18 @@ export const EventCard: FC<CardProps> = ({ event }) => {
         {event.description && (
           <p className="text-gray-700 mt-2">{event.description}</p>
         )}
+      </div>
+      <div className="p-4">
+        <Button
+          size="lg"
+          className="px-2"
+          variant="ghost"
+          aria-label="Preview event"
+          onClick={() => openSheet(event)}
+        >
+          <Eye className="!h-6 !w-6 text-gray-700" />
+          Brzi pregled
+        </Button>
       </div>
     </div>
   );
