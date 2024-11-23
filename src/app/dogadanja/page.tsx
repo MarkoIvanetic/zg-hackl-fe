@@ -14,7 +14,7 @@ export default function DogadanjaPage() {
         <div className="container mx-auto p-6">
           <div className="flex gap-x-2">
             <SidebarTrigger/>
-            <h1 className="text-2xl font-bold mb-4">Događanja</h1>
+            <h1 className="text-2xl font-bold mb-8">Događanja</h1>
           </div>
           <QuickCategories />
           <EventList />
