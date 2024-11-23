@@ -2,10 +2,10 @@
 
 import { CategorySelector } from "@/components/features/sidebar/CategorySelector";
 import { DateRangePicker } from "@/components/features/sidebar/DateRangePicker";
-import { KidFriendlyFilter } from "@/components/features/sidebar/KidFriendlyFilter";
+import { LocationFilter } from "@/components/features/sidebar/LocationFilter";
 import { PriceRangeInputs } from "@/components/features/sidebar/PriceRangeInputs";
 import { ResetButton } from "@/components/features/sidebar/ResetButton";
-import { ShowEventsFilter } from "@/components/features/sidebar/ShowEventsFilter";
+import { SearchFilter } from "@/components/features/sidebar/SearchFilter";
 import {
   Sidebar,
   SidebarContent,
@@ -20,22 +20,25 @@ export const AppSidebar = () => {
       <SidebarHeader>
         <h1 className="text-xl px-4 font-semibold">Filtriraj događaje</h1>
       </SidebarHeader>
-      <SidebarContent className="space-y-4 px-4 py-2">
+      <SidebarContent className="space-y-3 px-4 py-2">
         <SidebarGroup>
-          <ShowEventsFilter />
+          <SearchFilter />
         </SidebarGroup>
         <SidebarGroup>
           <DateRangePicker />
         </SidebarGroup>
         <SidebarGroup>
-          <PriceRangeInputs />
+          <LocationFilter />
         </SidebarGroup>
         <SidebarGroup>
           <CategorySelector />
         </SidebarGroup>
         <SidebarGroup>
-          <KidFriendlyFilter />
+          <PriceRangeInputs />
         </SidebarGroup>
+        {/* <SidebarGroup>
+          <KidFriendlyFilter />
+        </SidebarGroup> */}
         <SidebarGroup>
           <ResetButton />
         </SidebarGroup>

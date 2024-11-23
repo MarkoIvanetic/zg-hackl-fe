@@ -1,6 +1,7 @@
 "use client";
 
 import EventList from "@/components/features/EventList";
+import { QuickCategories } from "@/components/features/filtering/QuickCategories";
 import { AppSidebar } from "@/components/features/sidebar/AppSidebar";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Suspense } from "react";
@@ -15,6 +16,7 @@ export default function DogadanjaPage() {
             <SidebarTrigger/>
             <h1 className="text-2xl font-bold mb-4">Događanja</h1>
           </div>
+          <QuickCategories />
           <EventList />
         </div>
       </main>
