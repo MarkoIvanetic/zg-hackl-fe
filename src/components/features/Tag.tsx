@@ -2,22 +2,21 @@ import { Badge } from "@/components/ui/badge";
 import { Music, Theater, Landmark, Clock } from "lucide-react";
 
 export function Tag({
-  tag,
+  tagName,
   style,
   time,
 }: {
-  tag: string;
+  tagName: string;
   style?: string;
   time?: string;
 }) {
   const getTagStyle = (tagName: string) => {
-
     if (!tagName) {
       return style || "bg-gray-100 text-gray-800 border-gray-300";
     }
 
     switch (tagName.toLowerCase()) {
-      case "concert":
+      case "glazba":
         return "bg-blue-100 text-blue-800 border-blue-300 px-4 py-2";
       case "opera":
         return "bg-red-50 text-red-600 border-red-200 px-4 py-2";
@@ -36,7 +35,7 @@ export function Tag({
     }
 
     switch (tagName.toLowerCase()) {
-      case "concert":
+      case "glazba":
         return <Music className="mr-2 h-4 w-4" />;
       case "opera":
         return <Theater className="mr-2 h-4 w-4" />;
@@ -50,9 +49,9 @@ export function Tag({
   };
 
   return (
-    <Badge variant="outline" className={getTagStyle(tag)}>
-      {getTagIcon(tag)}
-      {tag === "time" && time ? time : tag}
+    <Badge variant="outline" className={getTagStyle(tagName)}>
+      {getTagIcon(tagName)}
+      {tagName === "time" && time ? time : tagName}
     </Badge>
   );
 }

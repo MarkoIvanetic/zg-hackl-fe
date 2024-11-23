@@ -27,15 +27,18 @@ const QuickCategory: React.FC<QuickCategoryProps> = ({
       size="lg"
       onClick={onClick}
       className={cn(
-        "flex flex-col items-center rounded-none justify-center focus:outline-none group p-1 pb-4 [&_svg]:size-6 hover:bg-transparent ",
-        "className",
+        "flex flex-col items-center justify-center rounded-none focus:outline-none group transition-colors",
+        "h-24 px-4 rounded-xl",
+        "gap-2",
         isActive
-          ? activeStyle
-          : "border-b-2 border-transparent hover:border-black"
+          ? "bg-navigation hover:bg-navigation [&_svg]:text-white [&_p]:text-white"
+          : "hover:bg-sky-50 border-b-2 border-transparent hover:border-sky-100"
       )}
     >
-      <div className="">{icon}</div>
-      <p className="text-sm text-center text-gray-700">{label}</p>
+      <div className="flex items-center justify-center [&_svg]:size-6">
+        {icon}
+      </div>
+      <p className="text-sm text-center transition-colors">{label}</p>
     </Button>
   );
 };
@@ -45,8 +48,7 @@ export const QuickCategories: React.FC = () => {
 
   const categories = [
     {
-      icon: <CandyCane color="#ef4444" />,
-      color: "#ef4444",
+      icon: <CandyCane />,
       label: "Božić dolazi",
       onClick: () =>
         change({

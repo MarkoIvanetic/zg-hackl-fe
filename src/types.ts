@@ -7,6 +7,6 @@ export interface Event {
   start_datetime: string;
   end_datetime: string;
   price: string;
-  media_url: string | null;
+  image_url: string | null;
   event_url: string | null;
 }

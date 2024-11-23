@@ -5,6 +5,9 @@ const nextConfig: NextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
+  images: {
+    domains: ["v5.airtableusercontent.com"], // Add this line
+  },
   eslint: {
     ignoreDuringBuilds: true, // Ignores ESLint errors during the build
   },

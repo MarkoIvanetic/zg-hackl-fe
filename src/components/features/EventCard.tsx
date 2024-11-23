@@ -23,6 +23,7 @@ interface CardProps {
 }
 
 export const EventCard: FC<CardProps> = ({ event }) => {
+  console.log("EVENT", event);
   const startDate = new Date(event.start_datetime);
   const formattedStartDate = startDate.toLocaleString();
 
@@ -44,10 +45,12 @@ export const EventCard: FC<CardProps> = ({ event }) => {
   return (
     <div className="w-full rounded-lg shadow-md bg-white border hover:shadow-lg transition-shadow duration-200 flex flex-col">
       <div className="h-48 overflow-hidden rounded-t-lg bg-gray-200 flex items-center justify-center relative">
-        {event.media_url ? (
+        {event.image_url ? (
           <Image
-            src={event.media_url}
+            src={event.image_url}
             alt={event.name}
+            width={500}
+            height={300}
             className="w-full h-full object-cover"
           />
         ) : (
@@ -62,21 +65,21 @@ export const EventCard: FC<CardProps> = ({ event }) => {
         <div className="absolute top-4 right-4">
           {isBookmarked ? (
             <BookmarkIconSolid
-              className="!h-6 !w-6 text-sky-800"
+              className="!h-6 !w-6 text-navigation"
               onClick={toggleBookmark}
             />
           ) : (
             <BookmarkIcon
-              className="!h-6 !w-6 text-gray-700"
+              className="!h-6 !w-6 text-navigation"
               onClick={toggleBookmark}
             />
           )}
         </div>
         <div className="absolute bottom-2 left-2 flex gap-2">
-          <Tag tag={event.category} />
+          <Tag tagName={event.category} />
           {showTimeTag && (
             <Tag
-              tag="time"
+              tagName="time"
               time={
                 daysRemaining === 0
                   ? "Danas"
