@@ -21,22 +21,11 @@ export const UserMenu = () => {
           </button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-48">
-          <DropdownMenuItem onClick={() => alert("Profile clicked")}>
-            Profile
-          </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => alert("Settings clicked")}>
-            Settings
-          </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => alert("Help clicked")}>
-            Help
-          </DropdownMenuItem>
-          <DropdownMenuItem
-            onClick={() => {
-              alert("Logging out");
-            }}
-            className="text-red-500"
-          >
-            Logout
+          <DropdownMenuItem>Profil</DropdownMenuItem>
+          <DropdownMenuItem>Postavke</DropdownMenuItem>
+          <DropdownMenuItem>Pomoc</DropdownMenuItem>
+          <DropdownMenuItem className="text-red-500">
+            Odjavi se
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

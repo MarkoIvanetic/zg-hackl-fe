@@ -14,7 +14,7 @@ export const EventPreviewSheet = () => {
   const { event, isSheetOpen, closeSheet } = useEventPreview();
 
   return (
-    <Sheet open={isSheetOpen}  onOpenChange={closeSheet}>
+    <Sheet open={isSheetOpen} onOpenChange={closeSheet}>
       <SheetContent side="right" className="max-w-[400px] sm:max-w-[540px]">
         <SheetHeader>
           <SheetTitle>{event?.name || "Event Details"}</SheetTitle>

@@ -1,10 +1,12 @@
 "use client";
 
 import { ZgLogo } from "@/components/icons/ZgLogo";
-import { usePathname } from "next/navigation";
-import Link from "next/link";
+import { LanguageMenu } from "@/components/LanguageMenu";
 import { Button } from "@/components/ui/button";
 import { UserMenu } from "@/components/UserMenu";
+import { PersonStanding } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const NAV_ITEMS = [
   { href: "/", label: "Naslovnica" },
@@ -45,7 +47,13 @@ export const Navigation = () => {
             })}
           </ul>
 
-          <UserMenu />
+          <div className="flex gap-x-4">
+            <Button variant="ghost" size="icon" className="[&_svg]:size-6">
+              <PersonStanding size={32} />
+            </Button>
+            <LanguageMenu />
+            <UserMenu />
+          </div>
         </div>
       </div>
     </nav>
