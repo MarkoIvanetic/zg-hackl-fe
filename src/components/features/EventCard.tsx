@@ -26,8 +26,6 @@ export const EventCard: FC<CardProps> = ({ event }) => {
   const startDate = new Date(event.start_datetime);
   const formattedStartDate = startDate.toLocaleString();
 
-  console.log("Event description:", event.description);
-
   const { openSheet } = useEventPreview();
   const [isBookmarked, setIsBookmarked] = useState(false);
 
