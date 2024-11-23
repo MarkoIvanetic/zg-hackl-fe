@@ -23,6 +23,10 @@ export default {
           border: "var(--sidebar-border)",
           ring: "var(--sidebar-ring)",
         },
+        button: {
+          primary: "#93b959",
+          secondary: "#D0D8E3",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
