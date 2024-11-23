@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 
 import { AppProviders } from "@/components/features/AppProviders";
-import "./globals.css";
-import Link from "next/link";
 import { EventPreviewSheet } from "@/components/features/EventPreviewSheet";
+
+import "./globals.css";
+import { Navigation } from "@/components/features/Navigation";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -32,29 +33,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <nav className="bg-sky-800 text-white">
-          <div className="container mx-auto flex items-center justify-between p-4">
-            <h1 className="text-lg font-bold w-1/2">Zagreb događanja</h1>
-            <ul className="flex space-x-8">
-              <li>
-                <Link
-                  href="/"
-                  className="text-gray-300 hover:text-white transition"
-                >
-                  Naslovnica
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/dogadanja"
-                  className="text-gray-300 hover:text-white transition"
-                >
-                  Događanja
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </nav>
+        <Navigation />
         <AppProviders>
           <EventPreviewSheet />
           {children}

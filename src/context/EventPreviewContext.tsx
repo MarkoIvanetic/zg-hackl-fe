@@ -21,7 +21,6 @@ export const EventPreviewProvider: FC<{ children: ReactNode }> = ({
   const [isSheetOpen, setSheetOpen] = useState(false);
 
   const openSheet = (event: Event) => {
-    console.log('event:', event);
     setEvent(event);
     setSheetOpen(true);
   };

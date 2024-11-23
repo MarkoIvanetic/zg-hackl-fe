@@ -60,10 +60,7 @@ export const ShowEventsFilter = ({
   };
 
   return (
-    <div className={`space-y-2 ${className}`} {...props}>
-      <label className="text-md font-semibold leading-none mb-4 block">
-        Pokaži događaje za:
-      </label>
+    <div className={className} {...props}>
       <div className="flex gap-x-2">
         {options.map((option) => (
           <Button
