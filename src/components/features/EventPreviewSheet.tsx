@@ -27,7 +27,7 @@ export const EventPreviewSheet = () => {
             <strong>Location:</strong> {event?.location}
           </p>
           <p>
-            <strong>Type:</strong> {event?.event_type}
+            <strong>Type:</strong> {event?.category}
           </p>
           <p>
             <strong>Price:</strong> {event?.price || "Free"}

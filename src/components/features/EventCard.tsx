@@ -73,7 +73,7 @@ export const EventCard: FC<CardProps> = ({ event }) => {
           )}
         </div>
         <div className="absolute bottom-2 left-2 flex gap-2">
-          <Tag tag={event.event_type} />
+          <Tag tag={event.category} />
           {showTimeTag && (
             <Tag
               tag="time"

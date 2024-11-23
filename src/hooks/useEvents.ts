@@ -6,7 +6,7 @@ import { endOfDay, format, startOfDay } from "date-fns";
 
 export type FetchEventsParams = {
   search?: string;
-  event_type?: string;
+  category?: string;
   organizer_id?: string;
   min_price?: string;
   max_price?: string;

@@ -28,7 +28,7 @@ export default async function EventDetailsPage({ params }) {
         <strong>Lokacija:</strong> {event.location}
       </p>
       <p>
-        <strong>Vrsta:</strong> {event.event_type}
+        <strong>Vrsta:</strong> {event.category}
       </p>
       <p>
         <strong>Cijena:</strong> {event.price} kn

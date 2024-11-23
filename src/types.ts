@@ -1,7 +1,7 @@
 export interface Event {
   id: number;
   name: string;
-  event_type: string;
+  category: string;
   location: string;
   description: string | null;
   start_datetime: string;

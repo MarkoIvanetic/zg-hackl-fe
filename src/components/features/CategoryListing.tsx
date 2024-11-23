@@ -10,7 +10,7 @@ interface CategoryListProps {
 
 export const CategoryListing: FC<CategoryListProps> = ({ category }) => {
   const { data, isFetching, isError, error } = useEvents({
-    event_type: category,
+    category: category,
     page: "1",
     per_page: "6",
   });

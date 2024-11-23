@@ -17,13 +17,13 @@ export const LocationFilter = ({
   const { query, change } = useQueryParams();
 
   const handleCategoryChange = (category: string) => {
-    change({ event_type: category || null, page: null });
+    change({ category: category || null, page: null });
   };
 
   return (
     <div className={className} {...props}>
       <Select
-        value={query.event_type || ""}
+        value={query.category || ""}
         onValueChange={handleCategoryChange}
       >
         <SelectTrigger

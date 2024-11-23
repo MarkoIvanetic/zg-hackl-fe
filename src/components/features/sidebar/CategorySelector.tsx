@@ -19,15 +19,12 @@ export const CategorySelector = ({
   const { query, change } = useQueryParams();
 
   const handleCategoryChange = (category: string) => {
-    change({ event_type: category || null, page: null });
+    change({ category: category || null, page: null });
   };
 
   return (
     <div className={className} {...props}>
-      <Select
-        value={query.event_type || ""}
-        onValueChange={handleCategoryChange}
-      >
+      <Select value={query.category || ""} onValueChange={handleCategoryChange}>
         <SelectTrigger
           className="w-full bg-white py-5"
           // @ts-expect-error see in component

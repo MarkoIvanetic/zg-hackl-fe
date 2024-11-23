@@ -48,7 +48,7 @@ export const EventCard: FC<CardProps> = ({ event }) => {
           {event.name}
         </Link>
 
-        <p className="text-sm text-gray-500">{event.event_type}</p>
+        <p className="text-sm text-gray-500">{event.category}</p>
         <p className="text-sm text-gray-500">Location: {event.location}</p>
         <p className="text-sm text-gray-500">
           Time: {startDate} - {endDate}

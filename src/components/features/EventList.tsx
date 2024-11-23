@@ -18,7 +18,7 @@ export default function EventList() {
 
   const {
     search = "",
-    event_type = "",
+    category = "",
     min_price = "",
     max_price = "",
     kid_friendly = "",
@@ -32,7 +32,7 @@ export default function EventList() {
 
   const { data, isFetching, error, isError } = useEvents({
     search,
-    event_type,
+    category,
     min_price,
     max_price,
     kid_friendly,
