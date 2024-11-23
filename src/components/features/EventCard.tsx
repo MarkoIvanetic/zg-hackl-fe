@@ -3,11 +3,19 @@
 import { Event } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
-import { FC } from "react";
+import { FC, useState } from "react";
+import { BookmarkIcon } from "@heroicons/react/24/outline";
+import { MapPinIcon } from "@heroicons/react/24/solid";
+import { CalendarDaysIcon } from "@heroicons/react/24/outline";
+import { CurrencyEuroIcon } from "@heroicons/react/24/outline";
+import { ArrowRightIcon } from "@heroicons/react/24/outline";
+import { BookmarkIcon as BookmarkIconSolid } from "@heroicons/react/24/solid";
+import { differenceInDays } from "date-fns";
 
 import { Eye } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { Tag } from "@/components/features/Tag";
 import { useEventPreview } from "@/context/EventPreviewContext";
 
 interface CardProps {
@@ -15,14 +23,29 @@ interface CardProps {
 }
 
 export const EventCard: FC<CardProps> = ({ event }) => {
-  const startDate = new Date(event.start_datetime).toLocaleString();
-  const endDate = new Date(event.end_datetime).toLocaleString();
+  const startDate = new Date(event.start_datetime);
+  const formattedStartDate = startDate.toLocaleString();
+
+  console.log("Event description:", event.description);
 
   const { openSheet } = useEventPreview();
+  const [isBookmarked, setIsBookmarked] = useState(false);
+
+  const truncatedDescription =
+    event.description && event.description.length > 100
+      ? event.description.substring(0, 100) + "..."
+      : event.description;
+
+  const toggleBookmark = () => {
+    setIsBookmarked(!isBookmarked);
+  };
+
+  const daysRemaining = differenceInDays(startDate, new Date());
+  const showTimeTag = daysRemaining <= 7 && daysRemaining >= 0;
 
   return (
-    <div className="rounded-lg shadow-md bg-white border hover:shadow-lg transition-shadow duration-200">
-      <div className="h-48 overflow-hidden rounded-t-lg bg-gray-200 flex items-center justify-center">
+    <div className="w-full rounded-lg shadow-md bg-white border hover:shadow-lg transition-shadow duration-200 flex flex-col">
+      <div className="h-48 overflow-hidden rounded-t-lg bg-gray-200 flex items-center justify-center relative">
         {event.media_url ? (
           <Image
             src={event.media_url}
@@ -30,38 +53,86 @@ export const EventCard: FC<CardProps> = ({ event }) => {
             className="w-full h-full object-cover"
           />
         ) : (
-          <span className="text-gray-500">Nema slike</span>
+          <Image
+            src="/placeholder.png"
+            alt="Nema slike"
+            width={500}
+            height={300}
+            className="w-full h-full object-cover"
+          />
         )}
+        <div className="absolute top-4 right-4">
+          {isBookmarked ? (
+            <BookmarkIconSolid
+              className="!h-6 !w-6 text-sky-800"
+              onClick={toggleBookmark}
+            />
+          ) : (
+            <BookmarkIcon
+              className="!h-6 !w-6 text-gray-700"
+              onClick={toggleBookmark}
+            />
+          )}
+        </div>
+        <div className="absolute bottom-2 left-2 flex gap-2">
+          <Tag tag={event.event_type} />
+          {showTimeTag && (
+            <Tag
+              tag="time"
+              time={
+                daysRemaining === 0
+                  ? "Danas"
+                  : `Za ${daysRemaining} ${
+                      daysRemaining === 1 ? "dan" : "dana"
+                    }`
+              }
+            />
+          )}
+        </div>
       </div>
 
       <div className="p-4">
         <Link
           href={`/dogadanja/${event.id}`}
-          className="font-semibold text-lg text-sky-600 hover:underline block"
+          className="font-bold text-lg text-gray-950 hover:underline"
         >
           {event.name}
         </Link>
-
-        <p className="text-sm text-gray-500">{event.event_type}</p>
-        <p className="text-sm text-gray-500">Location: {event.location}</p>
-        <p className="text-sm text-gray-500">
-          Time: {startDate} - {endDate}
+        <p className="text-sm text-gray-800 flex items-center gap-2">
+          <MapPinIcon className="!h-4 !w-4 text-gray-700" />
+          {event.location}
         </p>
-        <p className="text-sm text-gray-500">Price: ${event.price}</p>
-        {event.description && (
-          <p className="text-gray-700 mt-2">{event.description}</p>
+        <p className="text-sm text-gray-800 flex items-center gap-2">
+          <CalendarDaysIcon className="!h-4 !w-4 text-gray-700" />
+          {formattedStartDate}
+        </p>
+        <p className="text-sm text-gray-800 flex items-center gap-2">
+          <CurrencyEuroIcon className="!h-4 !w-4 text-gray-700" />€{event.price}
+        </p>
+        {event.description && event.description.length > 0 && (
+          <p className="text-gray-500 mt-2">{truncatedDescription}</p>
         )}
       </div>
-      <div className="p-4">
+      <div className="p-4 flex flex-wrap gap-2">
         <Button
           size="lg"
           className="px-2"
-          variant="ghost"
+          variant="secondary"
           aria-label="Preview event"
           onClick={() => openSheet(event)}
         >
-          <Eye className="!h-6 !w-6 text-gray-700" />
+          <Eye className="!h-4 !w-4 text-gray-700" />
           Brzi pregled
+        </Button>
+        <Button
+          size="lg"
+          className="px-2"
+          variant="action"
+          aria-label="Preview event"
+          onClick={() => openSheet(event)}
+        >
+          <ArrowRightIcon className="!h-4 !w-4 text-white stroke-2" />
+          Kupi ulaznicu
         </Button>
       </div>
     </div>
