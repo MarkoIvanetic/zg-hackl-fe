@@ -13,7 +13,16 @@ import {
   Accessibility,
   Coffee,
   GraduationCap,
+  ChevronDownIcon,
+  ChevronLeftIcon,
 } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import React, { useState } from "react";
 
 interface QuickCategoryProps {
   icon: React.ReactNode;
@@ -54,6 +63,16 @@ const QuickCategory: React.FC<QuickCategoryProps> = ({
 
 export const QuickCategories: React.FC = () => {
   const { query, change } = useQueryParams();
+  const [isOpen, setIsOpen] = useState(false);
+  const [sortOrder, setSortOrder] = useState<string>("kronoloski");
+
+  const handleSortChange = (order: string) => {
+    setSortOrder(order);
+    change({
+      sort: order,
+      page: null,
+    });
+  };
 
   const categories = [
     {
@@ -111,10 +130,10 @@ export const QuickCategories: React.FC = () => {
       label: "Ima parking",
       onClick: () =>
         change({
-          category: query.category === "tag4" ? null : "tag4",
+          tag5: query.tag5 === "true" ? null : "true",
           page: null,
         }),
-      isActive: query.category === "tag4",
+      isActive: query.tag5 === "true",
     },
     {
       icon: <Accessibility />,
@@ -160,6 +179,49 @@ export const QuickCategories: React.FC = () => {
             isActive={category.isActive}
           />
         ))}
+        <div className="flex items-center">
+          <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
+            <DropdownMenuTrigger asChild className="w-min cursor-pointer">
+              <Button
+                variant="default"
+                className="flex items-center bg-navigation"
+              >
+                {sortOrder === "uzlazno"
+                  ? "Cijena uzlazno"
+                  : sortOrder === "silazno"
+                  ? "Cijena silazno"
+                  : "Kronološki"}
+                <span className="ml-1">
+                  {isOpen ? (
+                    <ChevronDownIcon className="w-4 h-4" />
+                  ) : (
+                    <ChevronLeftIcon className="w-4 h-4" />
+                  )}
+                </span>
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-48">
+              <DropdownMenuItem
+                onClick={() => handleSortChange("uzlazno")}
+                className={sortOrder === "uzlazno" ? "font-semibold" : ""}
+              >
+                Cijena uzlazno
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={() => handleSortChange("silazno")}
+                className={sortOrder === "silazno" ? "font-semibold" : ""}
+              >
+                Cijena silazno
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={() => handleSortChange("kronoloski")}
+                className={sortOrder === "kronoloski" ? "font-semibold" : ""}
+              >
+                Kronološki
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
       </div>
     </div>
   );
