@@ -1,3 +1,4 @@
+import { demoResponse } from "@/data";
 import apiClient from "@/lib/apiClient";
 import { Event } from "@/types";
 import { useQuery, QueryFunctionContext } from "@tanstack/react-query";
@@ -61,11 +62,15 @@ export const useEvents = (params: FetchEventsParams) => {
 
   return useQuery<PaginatedEventsResponse, Error>({
     queryKey: ["events", debouncedParams],
+    // @ts-expect-error demo
     queryFn: ({ queryKey }: QueryFunctionContext) => {
       const [_key, queryParams] = queryKey as [string, FetchEventsParams];
+      if (queryParams.from) {
+        return demoResponse;
+      }
       return fetchEvents(queryParams);
     },
-    staleTime: 5 * 60 * 1000, // 5 minutes
+    staleTime: Infinity,
     refetchOnWindowFocus: true,
   });
 };
