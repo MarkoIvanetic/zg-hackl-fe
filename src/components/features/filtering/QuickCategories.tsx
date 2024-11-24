@@ -4,7 +4,16 @@ import { Button } from "@/components/ui/button";
 import useQueryParams from "@/hooks/useQueryParams";
 import { cn } from "@/lib/utils";
 import { TicketIcon } from "@heroicons/react/24/outline";
-import { Baby, CandyCane, Snowflake, Store, Piano } from "lucide-react";
+import {
+  Baby,
+  CandyCane,
+  Car,
+  Drama,
+  Heart,
+  Accessibility,
+  Coffee,
+  GraduationCap,
+} from "lucide-react";
 
 interface QuickCategoryProps {
   icon: React.ReactNode;
@@ -28,7 +37,7 @@ const QuickCategory: React.FC<QuickCategoryProps> = ({
       onClick={onClick}
       className={cn(
         "flex flex-col items-center justify-center rounded-none focus:outline-none group transition-colors",
-        "h-24 px-4 rounded-xl",
+        "h-24 px-4 rounded-xl min-w-[86px] max-w-[86px]",
         "gap-2",
         isActive
           ? "bg-navigation hover:bg-navigation [&_svg]:text-white [&_p]:text-white"
@@ -49,23 +58,23 @@ export const QuickCategories: React.FC = () => {
   const categories = [
     {
       icon: <CandyCane />,
-      label: "Božić dolazi",
+      label: "Božićno",
       onClick: () =>
         change({
-          tag: query.tag === "bozic" ? null : "bozic",
+          tag: query.tag === "tag1" ? null : "tag1",
           page: null,
         }),
-      isActive: query.tag === "bozic",
+      isActive: query.tag === "tag1",
     },
     {
-      icon: <Snowflake />,
-      label: "Zimske radosti",
+      icon: <Drama />,
+      label: "Komično",
       onClick: () =>
         change({
-          tag: query.tag === "snow" ? null : "snow",
+          tag: query.tag === "tag2" ? null : "tag2",
           page: null,
         }),
-      isActive: query.tag === "snow",
+      isActive: query.tag === "tag2",
     },
     {
       icon: <Baby size={64} />,
@@ -88,24 +97,54 @@ export const QuickCategories: React.FC = () => {
       isActive: query.price === "0",
     },
     {
-      icon: <Piano />,
-      label: "Klasična glazba",
+      icon: <Heart />,
+      label: "Za spoj",
       onClick: () =>
         change({
-          category: query.category === "Opera" ? null : "Opera",
+          category: query.category === "tag3" ? null : "tag3",
           page: null,
         }),
-      isActive: query.category === "Opera",
+      isActive: query.category === "tag3",
     },
     {
-      icon: <Store />,
-      label: "Sajmovi",
+      icon: <Car />,
+      label: "Ima parking",
       onClick: () =>
         change({
-          category: query.category === "Fair" ? null : "Fair",
+          category: query.category === "tag4" ? null : "tag4",
           page: null,
         }),
-      isActive: query.category === "Fair",
+      isActive: query.category === "tag4",
+    },
+    {
+      icon: <Accessibility />,
+      label: "Pristupačno",
+      onClick: () =>
+        change({
+          category: query.category === "tag5" ? null : "tag5",
+          page: null,
+        }),
+      isActive: query.category === "tag5",
+    },
+    {
+      icon: <Coffee />,
+      label: "Opuštajuće",
+      onClick: () =>
+        change({
+          category: query.category === "tag6" ? null : "tag6",
+          page: null,
+        }),
+      isActive: query.category === "tag6",
+    },
+    {
+      icon: <GraduationCap />,
+      label: "Za studente",
+      onClick: () =>
+        change({
+          category: query.category === "tag7" ? null : "tag7",
+          page: null,
+        }),
+      isActive: query.category === "tag7",
     },
   ];
 
