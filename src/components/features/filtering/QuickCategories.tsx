@@ -169,7 +169,7 @@ export const QuickCategories: React.FC = () => {
 
   return (
     <div className="relative">
-      <div className="flex gap-8 align-center overflow-x-auto no-scrollbar min-h-[60px] pt-3">
+      <div className="flex gap-8 align-center overflow-x-auto no-scrollbar min-h-[60px] pt-3 mr-16">
         {categories.map((category, index) => (
           <QuickCategory
             key={index}
@@ -179,7 +179,13 @@ export const QuickCategories: React.FC = () => {
             isActive={category.isActive}
           />
         ))}
-        <div className="flex items-center">
+        <div
+          className="flex items-center absolute right-0 self-center py-12 px-8"
+          style={{
+            background:
+              "linear-gradient(to left, rgba(255, 255, 255, 1) 90%, rgba(255, 255, 255, 0))",
+          }}
+        >
           <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
             <DropdownMenuTrigger asChild className="w-min cursor-pointer">
               <Button
