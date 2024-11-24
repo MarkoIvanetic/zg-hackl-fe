@@ -75,8 +75,8 @@ export const EventCard: FC<CardProps> = ({ event, className }) => {
               onClick={toggleBookmark}
             />
           ) : (
-            <BookmarkIcon
-              className="!h-6 !w-6 text-navigation"
+            <BookmarkIconSolid
+              className="!h-6 !w-6  text-white"
               onClick={toggleBookmark}
             />
           )}

@@ -79,7 +79,7 @@ export const QuickCategories: React.FC = () => {
     },
     {
       icon: <TicketIcon />,
-      label: "Besplatni događaji",
+      label: "Besplatno",
       onClick: () =>
         change({
           price: query.price === "0" ? null : "0",
