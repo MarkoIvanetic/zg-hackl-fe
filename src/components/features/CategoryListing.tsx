@@ -12,7 +12,7 @@ export const CategoryListing: FC<CategoryListProps> = ({ category }) => {
   const { data, isFetching, isError, error } = useEvents({
     category: category,
     page: "1",
-    per_page: "6",
+    per_page: "50",
   });
 
   if (isError) return <p className="text-red-600">Failed to load {category}: {error.message}</p>;

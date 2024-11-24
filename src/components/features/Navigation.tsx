@@ -11,6 +11,7 @@ import { usePathname } from "next/navigation";
 const NAV_ITEMS = [
   { href: "/", label: "Naslovnica" },
   { href: "/dogadanja", label: "Događanja" },
+  { href: "/otkrij", label: "Otkrij" },
   { href: "#", label: "Kontakt" },
 ];
 
@@ -47,7 +48,7 @@ export const Navigation = () => {
             })}
           </ul>
 
-          <div className="flex gap-x-4">
+          <div className="gap-x-4 hidden md:flex">
             <Button variant="ghost" size="icon" className="[&_svg]:size-6">
               <PersonStanding size={32} />
             </Button>

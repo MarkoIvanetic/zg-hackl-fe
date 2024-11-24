@@ -5,7 +5,13 @@ export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // Exclude paths that should not be redirected
-  const excludedPaths = ["/dogadanja", "/api", "/_next", "/favicon.ico"];
+  const excludedPaths = [
+    "/otkrij",
+    "/dogadanja",
+    "/api",
+    "/_next",
+    "/favicon.ico",
+  ];
 
   if (excludedPaths.some((path) => pathname.startsWith(path))) {
     return NextResponse.next();

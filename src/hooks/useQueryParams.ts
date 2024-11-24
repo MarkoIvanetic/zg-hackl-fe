@@ -12,7 +12,7 @@ function useQueryParams(): {
   // Memoize the query object to avoid triggering rerenders
   const query = useMemo(() => {
     return Object.fromEntries(searchParams.entries());
-  }, [searchParams]);
+  }, [searchParams.size]);
 
   // Function to update query parameters
   const change = (newQuery: Record<string, string | null>) => {
