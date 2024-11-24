@@ -27,7 +27,7 @@ type PaginatedEventsResponse = {
   records: Event[];
 };
 
-const fetchEvents = async (
+export const fetchEvents = async (
   params: FetchEventsParams = {}
 ): Promise<PaginatedEventsResponse> => {
   const filteredParams: Record<string, string> = {};

@@ -17,13 +17,14 @@ import { Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Tag } from "@/components/features/Tag";
 import { useEventPreview } from "@/context/EventPreviewContext";
+import { cn } from "@/lib/utils";
 
 interface CardProps {
+  className?: string;
   event: Event;
 }
 
-export const EventCard: FC<CardProps> = ({ event }) => {
-  console.log("EVENT", event);
+export const EventCard: FC<CardProps> = ({ event, className }) => {
   const startDate = new Date(event.start_datetime);
   const formattedStartDate = startDate.toLocaleString();
 
@@ -43,7 +44,12 @@ export const EventCard: FC<CardProps> = ({ event }) => {
   const showTimeTag = daysRemaining <= 7 && daysRemaining >= 0;
 
   return (
-    <div className="w-full rounded-lg shadow-md bg-white border hover:shadow-lg transition-shadow duration-200 flex flex-col">
+    <div
+      className={cn(
+        "w-full rounded-lg shadow-md bg-white border hover:shadow-lg transition-shadow duration-200 flex flex-col",
+        className
+      )}
+    >
       <div className="h-48 overflow-hidden rounded-t-lg bg-gray-200 flex items-center justify-center relative">
         {event.image_url ? (
           <Image
@@ -138,7 +144,7 @@ export const EventCard: FC<CardProps> = ({ event }) => {
       </div>
     </div>
   );
-};
+}
 
 export const EventCardSkeleton: FC = () => {
   return (
